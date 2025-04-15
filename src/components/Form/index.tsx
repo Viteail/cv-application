@@ -5,7 +5,6 @@ import classes from "./form.module.css";
 
 import { TData } from "../App";
 
-
 export interface IInputProps {
   text: string;
   name: string;
@@ -16,8 +15,10 @@ export interface IInputProps {
 export interface IFormProps {
   inputs: IInputProps[];
   dataState: {
-    data: TData;
-    setData: React.Dispatch<React.SetStateAction<TData>>;
+    data: TData | TData[];
+    setData:
+      | React.Dispatch<React.SetStateAction<TData>>
+      | React.Dispatch<React.SetStateAction<TData[]>>;
   };
 }
 
@@ -38,18 +39,23 @@ export const Form: React.FC<IFormProps> = (props) => {
           ]),
         );
 
-        const updatedData = { ...data };
+        if (Array.isArray(data)) {
+          const updatedData = [...data, formValues] as TData[];
+          (setData as React.Dispatch<React.SetStateAction<TData[]>>)(updatedData);
+        } else {
+          const updatedData = { ...data } as TData;
 
-        for (const [key, value] of Object.entries(formValues)) {
-          updatedData[key] = value;
+          for (const [key, value] of Object.entries(formValues)) {
+            updatedData[key] = value;
+          }
+
+          (setData as React.Dispatch<React.SetStateAction<TData>>)(updatedData);
         }
-
-        setData(updatedData);
       }}
       className={classes.form}
     >
       {inputs.map((input) => (
-        <Input key={input.name} {...input} value={data[input.name]} ></Input>
+        <Input key={input.name} {...input} value={data[input.name]}></Input>
       ))}
       <Button variant="delete">Delete</Button>
       <div className={classes.formBtnWrapper}>

@@ -8,6 +8,7 @@ import { Section } from "../Section";
 import { CvProfile } from "../CvProfile";
 import { Form } from "../Form";
 import { Button } from "../Button";
+import { Card } from "../Card";
 
 export type TData = Record<string, string>;
 
@@ -40,12 +41,14 @@ export const App: React.FC = () => {
   const [personalData, setPersonalData] = useState<TData>(
     PERSONAL_FORM.reduce((acc, curr) => ({ ...acc, [curr.name]: "" }), {}),
   );
-  const [educationalData, setEducationalData] = useState<TData>(
-    EDUCATIONAL_FORM.reduce((acc, curr) => ({ ...acc, [curr.name]: "" }), {}),
+  const [educationalDatas, setEducationalDatas] = useState<TData[]>([]
+    // EDUCATIONAL_FORM.reduce((acc, curr) => ({ ...acc, [curr.name]: "" }), {}),
   );
-  const [practicalData, setPracticalData] = useState<TData>(
-    PRACTICAL_FORM.reduce((acc, curr) => ({ ...acc, [curr.name]: "" }), {}),
+  const [practicalDatas, setPracticalDatas] = useState<TData[]>([]
+    // PRACTICAL_FORM.reduce((acc, curr) => ({ ...acc, [curr.name]: "" }), {}),
   );
+
+  console.log(personalData, educationalDatas, practicalDatas)
 
   const handleIndexActivate = (index: number) => {
     return () => setIndexActive(index);
@@ -54,7 +57,7 @@ export const App: React.FC = () => {
   return (
     <>
       <div className={classes.sectionWrapper}>
-        <Section text="Personal Details">
+        <Section text="Persona Details">
           {isindexActive === 0 && (
             <Form
               dataState={{ data: personalData, setData: setPersonalData }}
@@ -71,7 +74,7 @@ export const App: React.FC = () => {
         <Section text="Educational Experience">
           {isindexActive === 1 && (
             <Form
-              dataState={{ data: educationalData, setData: setEducationalData }}
+              dataState={{ data: educationalDatas, setData: setEducationalDatas }}
               inputs={EDUCATIONAL_FORM}
             ></Form>
           )}
@@ -85,7 +88,7 @@ export const App: React.FC = () => {
         <Section text="Practical Experience">
           {isindexActive === 2 && (
             <Form
-              dataState={{ data: practicalData, setData: setPracticalData }}
+              dataState={{ data: practicalDatas, setData: setPracticalDatas }}
               inputs={PRACTICAL_FORM}
             ></Form>
           )}
