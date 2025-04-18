@@ -67,7 +67,7 @@ export const Form: React.FC<IFormProps> = (props) => {
       ))}
       <Button variant="delete">Delete</Button>
       <div className={classes.formBtnWrapper}>
-        <Button variant="cancel">Cancel</Button>
+        <Button onClick={onClickDeactivate} variant="cancel">Cancel</Button>
         <Button type="submit" variant="submit">
           Submit
         </Button>
