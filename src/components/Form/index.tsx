@@ -19,7 +19,7 @@ export interface IFormProps {
     setData: React.Dispatch<React.SetStateAction<TData[]>>;
   };
   dataInput?: TData;
-  onClickDeactivate: () => void; 
+  onClickDeactivate: () => void;
 }
 
 export const Form: React.FC<IFormProps> = (props) => {
@@ -39,9 +39,19 @@ export const Form: React.FC<IFormProps> = (props) => {
           ]),
         );
 
-        formValues.id = crypto.randomUUID();
+        let updatedData = [...datas];
 
-        const updatedData = [...datas, formValues] as TData[];
+        if (dataInput !== null) {
+          for (const [key, value] of Object.entries(formValues)) {
+            dataInput[key] = value;
+          }
+
+          updatedData = [...datas];
+        } else {
+          formValues.id = crypto.randomUUID();
+
+          updatedData = [...datas, formValues] as TData[];
+        }
         setData(updatedData);
 
         onClickDeactivate();

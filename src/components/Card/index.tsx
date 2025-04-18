@@ -7,14 +7,18 @@ import { Button } from "../Button";
 
 interface ICardProps {
   title: string;
+  onEdit: () => void;
 }
 
 export const Card: React.FC<ICardProps> = (props) => {
-  const { title } = props;
+  const { title, onEdit } = props;
   return (
     <div className={classes.card}>
       <div className={classes.title}>{title}</div>
-      <Button leftIcon={<Icon path={mdiPencil} size={1} />}></Button>
+      <Button
+        onClick={onEdit}
+        leftIcon={<Icon path={mdiPencil} size={1} />}
+      ></Button>
     </div>
   );
 };

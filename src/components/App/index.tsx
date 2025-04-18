@@ -34,6 +34,7 @@ export const App: React.FC = () => {
             <CardList
               type="personal"
               dataState={{ datas: personalData, setData: setPersonalData }}
+              inputs={FORM_MAP.personal}
             ></CardList>
           )}
           {isindexActive === 0 && (
@@ -60,6 +61,7 @@ export const App: React.FC = () => {
                 datas: educationalDatas,
                 setData: setEducationalDatas,
               }}
+              inputs={FORM_MAP.educational}
             ></CardList>
           )}
           {isindexActive === 1 && (
@@ -84,6 +86,7 @@ export const App: React.FC = () => {
             <CardList
               type="practical"
               dataState={{ datas: practicalDatas, setData: setPracticalDatas }}
+              inputs={FORM_MAP.practical}
             ></CardList>
           )}
           {isindexActive === 2 && (
