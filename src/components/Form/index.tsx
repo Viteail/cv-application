@@ -15,16 +15,16 @@ export interface IInputProps {
 export interface IFormProps {
   inputs: IInputProps[];
   dataState: {
-    data: TData | TData[];
-    setData:
-      | React.Dispatch<React.SetStateAction<TData>>
-      | React.Dispatch<React.SetStateAction<TData[]>>;
+    datas: TData[];
+    setData: React.Dispatch<React.SetStateAction<TData[]>>;
   };
+  dataInput?: TData;
+  onClickDeactivate: () => void; 
 }
 
 export const Form: React.FC<IFormProps> = (props) => {
-  const { inputs, dataState } = props;
-  const { data, setData } = dataState;
+  const { inputs, dataState, dataInput = null, onClickDeactivate } = props;
+  const { datas, setData } = dataState;
 
   return (
     <form
@@ -39,23 +39,21 @@ export const Form: React.FC<IFormProps> = (props) => {
           ]),
         );
 
-        if (Array.isArray(data)) {
-          const updatedData = [...data, formValues] as TData[];
-          (setData as React.Dispatch<React.SetStateAction<TData[]>>)(updatedData);
-        } else {
-          const updatedData = { ...data } as TData;
+        formValues.id = crypto.randomUUID();
 
-          for (const [key, value] of Object.entries(formValues)) {
-            updatedData[key] = value;
-          }
+        const updatedData = [...datas, formValues] as TData[];
+        setData(updatedData);
 
-          (setData as React.Dispatch<React.SetStateAction<TData>>)(updatedData);
-        }
+        onClickDeactivate();
       }}
       className={classes.form}
     >
       {inputs.map((input) => (
-        <Input key={input.name} {...input} value={data[input.name]}></Input>
+        <Input
+          key={input.name}
+          {...input}
+          value={dataInput === null ? "" : dataInput[input.name]}
+        ></Input>
       ))}
       <Button variant="delete">Delete</Button>
       <div className={classes.formBtnWrapper}>

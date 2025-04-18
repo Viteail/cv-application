@@ -1,7 +1,4 @@
-:root {
-  --white: #ffffff;
-  --gray: #808080;
-}
+@import '../../colors/colors.css';
 
 button {
   display: flex;
@@ -10,7 +7,7 @@ button {
   gap: 8px;
   font-weight: 600;
   font-size: 1rem;
-  background-color: var(--white);
+  background-color: var(--white-color);
 }
 
 button:focus {
@@ -22,13 +19,12 @@ button:focus {
 }
 
 .buttonWrapper {
-  padding: 10px;
 }
 
 .cancelBtn, .deleteBtn, .submitBtn {
-  color: var(--gray); 
+  color: var(--gray-color); 
   padding: 8px 16px;
-  border: 1px solid var(--gray);
+  border: 1px solid var(--gray-color);
   border-radius: 5px;
 }
 

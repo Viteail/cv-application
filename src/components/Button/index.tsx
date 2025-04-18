@@ -1,12 +1,12 @@
 import classes from "./button.module.css";
 
 interface IButtonProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   leftIcon?: React.ReactNode;
   variant?: "primary" | "delete" | "cancel" | "submit";
   type?: "button" | "submit" | "reset";
   valid?: boolean;
-  onClick?: React.UIEventHandler;
+  onClick?: () => void;
 }
 
 const VariantMap = {
