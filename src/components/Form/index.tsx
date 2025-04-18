@@ -26,6 +26,19 @@ export const Form: React.FC<IFormProps> = (props) => {
   const { inputs, dataState, dataInput = null, onClickDeactivate } = props;
   const { datas, setData } = dataState;
 
+  const handleDelete = () => {
+    if (dataInput !== null) {
+      const index = datas.indexOf(dataInput);
+
+      const changedData = [...datas];
+      changedData.splice(index, 1);
+
+      setData(changedData);
+    }
+
+    onClickDeactivate();
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -65,9 +78,13 @@ export const Form: React.FC<IFormProps> = (props) => {
           value={dataInput === null ? "" : dataInput[input.name]}
         ></Input>
       ))}
-      <Button variant="delete">Delete</Button>
+      <Button onClick={handleDelete} variant="delete">
+        Delete
+      </Button>
       <div className={classes.formBtnWrapper}>
-        <Button onClick={onClickDeactivate} variant="cancel">Cancel</Button>
+        <Button onClick={onClickDeactivate} variant="cancel">
+          Cancel
+        </Button>
         <Button type="submit" variant="submit">
           Submit
         </Button>
