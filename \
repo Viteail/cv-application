@@ -8,14 +8,13 @@ import { Section } from "../Section";
 import { CvProfile } from "../CvProfile";
 import { Form } from "../Form";
 import { Button } from "../Button";
-import { CardList, TOnEdit } from "../CardList";
+import { CardList } from "../CardList";
 
 import { FORM_MAP } from "../Form/formConfigs";
-import { isNotMatchingId } from "./utils";
 
 export type TData = Record<string, string>;
+
 export type TIndexActive = number | null;
-export type TActiveKey = string | null;
 
 export const App: React.FC = () => {
   const [isindexActive, setIndexActive] = useState<TIndexActive>(null);
@@ -27,32 +26,24 @@ export const App: React.FC = () => {
 
   console.log(personalData, educationalDatas, practicalDatas);
 
-  console.log("pula", activeKey);
-  console.log("cns", isindexActive);
-
-  const handleEditForm: TOnEdit = (key) => {
-    setActiveKey(key);
-    setIndexActive(null);
+  const handleIndexActivate = (index: number) => {
+    return () => setIndexActive(index);
   };
 
   return (
     <>
       <div className={classes.sectionWrapper}>
         <Section text="Personal Details">
-          {personalData.length > 0 &&
-            isindexActive !== 0 &&
-            isNotMatchingId(personalData, activeKey) && (
-              <CardList
-                onEdit={(key) => handleEditForm(key)}
-                type="personal"
-                datas={personalData}
-              ></CardList>
-            )}
+          {(personalData.length > 0 && isindexActive !== 0 && personalData.every(data => data.key !== activeKey)) && (
+            <CardList
+              type="personal"
+              datas={personalData}
+            ></CardList>
+          )}
           {personalData.map((data) => {
             return (
               data.id === activeKey && (
                 <Form
-                  key={data.id}
                   onClickDeactivate={() => setActiveKey(null)}
                   dataState={{ datas: personalData, setData: setPersonalData }}
                   inputs={FORM_MAP.personal}
@@ -71,41 +62,27 @@ export const App: React.FC = () => {
           {personalData.length === 0 && (
             <Button
               leftIcon={<Icon path={mdiPlus} size={1} />}
-              onClick={() => {
-                setActiveKey(null);
-                setIndexActive(0);
-              }}
+              onClick={handleIndexActivate(0)}
             >
               Add
             </Button>
           )}
         </Section>
         <Section text="Educational Experience">
-          {educationalDatas.length > 0 &&
-            isindexActive !== 1 &&
-            isNotMatchingId(educationalDatas, activeKey) && (
-              <CardList
-                onEdit={(key) => setActiveKey(key)}
-                type="educational"
-                datas={educationalDatas}
-              ></CardList>
-            )}
-          {educationalDatas.map((data) => {
-            return (
-              data.id === activeKey && (
-                <Form
-                  key={data.id}
-                  onClickDeactivate={() => setActiveKey(null)}
-                  dataState={{
-                    datas: educationalDatas,
-                    setData: setEducationalDatas,
-                  }}
-                  inputs={FORM_MAP.educational}
-                  dataInput={data}
-                ></Form>
-              )
-            );
-          })}
+          {educationalDatas.length > 0 && (
+            <CardList
+              type="educational"
+              dataState={{
+                datas: educationalDatas,
+                setData: setEducationalDatas,
+              }}
+              indexState={{
+                indexActive: isindexActive,
+                setIndexActive: setIndexActive,
+              }}
+              inputs={FORM_MAP.educational}
+            ></CardList>
+          )}
           {isindexActive === 1 && (
             <Form
               onClickDeactivate={() => setIndexActive(null)}
@@ -118,41 +95,23 @@ export const App: React.FC = () => {
           )}
           <Button
             leftIcon={<Icon path={mdiPlus} size={1} />}
-            onClick={() => {
-              if (!isNotMatchingId(educationalDatas, activeKey)) return;
-              setActiveKey(null);
-              setIndexActive(1);
-            }}
+            onClick={handleIndexActivate(1)}
           >
             Experience
           </Button>
         </Section>
         <Section text="Practical Experience">
-          {practicalDatas.length > 0 &&
-            isindexActive !== 2 &&
-            isNotMatchingId(practicalDatas, activeKey) && (
-              <CardList
-                onEdit={(key) => setActiveKey(key)}
-                type="practical"
-                datas={practicalDatas}
-              ></CardList>
-            )}
-          {practicalDatas.map((data) => {
-            return (
-              data.id === activeKey && (
-                <Form
-                  key={data.id}
-                  onClickDeactivate={() => setActiveKey(null)}
-                  dataState={{
-                    datas: practicalDatas,
-                    setData: setPracticalDatas,
-                  }}
-                  inputs={FORM_MAP.practical}
-                  dataInput={data}
-                ></Form>
-              )
-            );
-          })}
+          {practicalDatas.length > 0 && (
+            <CardList
+              type="practical"
+              dataState={{ datas: practicalDatas, setData: setPracticalDatas }}
+              indexState={{
+                indexActive: isindexActive,
+                setIndexActive: setIndexActive,
+              }}
+              inputs={FORM_MAP.practical}
+            ></CardList>
+          )}
           {isindexActive === 2 && (
             <Form
               onClickDeactivate={() => setIndexActive(null)}
@@ -162,11 +121,7 @@ export const App: React.FC = () => {
           )}
           <Button
             leftIcon={<Icon path={mdiPlus} size={1} />}
-            onClick={() => {
-              if (!isNotMatchingId(practicalDatas, activeKey)) return;
-              setActiveKey(null);
-              setIndexActive(2);
-            }}
+            onClick={handleIndexActivate(2)}
           >
             Experience
           </Button>

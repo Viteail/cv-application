@@ -1,5 +1,8 @@
 import { Input } from "../Input";
 import { Button } from "../Button";
+import Icon from "@mdi/react";
+
+import { mdiDelete } from "@mdi/js";
 
 import classes from "./form.module.css";
 
@@ -15,16 +18,29 @@ export interface IInputProps {
 export interface IFormProps {
   inputs: IInputProps[];
   dataState: {
-    data: TData | TData[];
-    setData:
-      | React.Dispatch<React.SetStateAction<TData>>
-      | React.Dispatch<React.SetStateAction<TData[]>>;
+    datas: TData[];
+    setData: React.Dispatch<React.SetStateAction<TData[]>>;
   };
+  dataInput?: TData;
+  onClickDeactivate: () => void;
 }
 
 export const Form: React.FC<IFormProps> = (props) => {
-  const { inputs, dataState } = props;
-  const { data, setData } = dataState;
+  const { inputs, dataState, dataInput = null, onClickDeactivate } = props;
+  const { datas, setData } = dataState;
+
+  const handleDelete = () => {
+    if (dataInput !== null) {
+      const index = datas.indexOf(dataInput);
+
+      const changedData = [...datas];
+      changedData.splice(index, 1);
+
+      setData(changedData);
+    }
+
+    onClickDeactivate();
+  };
 
   return (
     <form
@@ -39,27 +55,39 @@ export const Form: React.FC<IFormProps> = (props) => {
           ]),
         );
 
-        if (Array.isArray(data)) {
-          const updatedData = [...data, formValues] as TData[];
-          (setData as React.Dispatch<React.SetStateAction<TData[]>>)(updatedData);
-        } else {
-          const updatedData = { ...data } as TData;
+        let updatedData = [...datas];
 
+        if (dataInput !== null) {
           for (const [key, value] of Object.entries(formValues)) {
-            updatedData[key] = value;
+            dataInput[key] = value;
           }
 
-          (setData as React.Dispatch<React.SetStateAction<TData>>)(updatedData);
+          updatedData = [...datas];
+        } else {
+          formValues.id = crypto.randomUUID();
+
+          updatedData = [...datas, formValues] as TData[];
         }
+        setData(updatedData);
+
+        onClickDeactivate();
       }}
       className={classes.form}
     >
       {inputs.map((input) => (
-        <Input key={input.name} {...input} value={data[input.name]}></Input>
+        <Input
+          key={input.name}
+          {...input}
+          value={dataInput === null ? "" : dataInput[input.name]}
+        ></Input>
       ))}
-      <Button variant="delete">Delete</Button>
+      <Button leftIcon={<Icon path={mdiDelete} size={1} />} onClick={handleDelete} variant="delete">
+        Delete
+      </Button>
       <div className={classes.formBtnWrapper}>
-        <Button variant="cancel">Cancel</Button>
+        <Button onClick={onClickDeactivate} variant="cancel">
+          Cancel
+        </Button>
         <Button type="submit" variant="submit">
           Submit
         </Button>
