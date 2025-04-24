@@ -1,5 +1,8 @@
 import { Input } from "../Input";
 import { Button } from "../Button";
+import Icon from "@mdi/react";
+
+import { mdiDelete } from "@mdi/js";
 
 import classes from "./form.module.css";
 
@@ -78,7 +81,7 @@ export const Form: React.FC<IFormProps> = (props) => {
           value={dataInput === null ? "" : dataInput[input.name]}
         ></Input>
       ))}
-      <Button onClick={handleDelete} variant="delete">
+      <Button leftIcon={<Icon path={mdiDelete} size={1} />} onClick={handleDelete} variant="delete">
         Delete
       </Button>
       <div className={classes.formBtnWrapper}>
