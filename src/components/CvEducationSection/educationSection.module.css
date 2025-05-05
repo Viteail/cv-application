@@ -1,0 +1,8 @@
+.educationSection {
+  display: flex;
+}
+
+.educationItem {
+  display: flex;
+  gap: 20px;
+}

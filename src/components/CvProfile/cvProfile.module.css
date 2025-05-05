@@ -1,0 +1,12 @@
+@import "../../colors/colors.css";
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  box-shadow: 0px 0px 5px var(--primary-shadow-color);
+}
+
+.profile > * {
+  padding: 40px;
+}

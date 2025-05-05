@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiPlus } from "@mdi/js";
 
@@ -12,6 +12,11 @@ import { CardList, TOnEdit } from "../CardList";
 
 import { FORM_MAP } from "../Form/formConfigs";
 import { isNotMatchingId } from "./utils";
+import {
+  getEducationExampleData,
+  getPersonalExampleData,
+  getPracticalExampleData,
+} from "./mockData";
 
 export type TData = Record<string, string>;
 export type TIndexActive = number | null;
@@ -25,6 +30,14 @@ export const App: React.FC = () => {
   const [educationalDatas, setEducationalDatas] = useState<TData[]>([]);
   const [practicalDatas, setPracticalDatas] = useState<TData[]>([]);
 
+  useEffect(() => {
+    if (personalData.length === 0)
+      setPersonalData([getPersonalExampleData()]);
+    if (educationalDatas.length === 0)
+      setEducationalDatas([getEducationExampleData()]);
+    if (practicalDatas.length === 0)
+      setPracticalDatas([getPracticalExampleData()]);
+  }, []);
   console.log(personalData, educationalDatas, practicalDatas);
 
   console.log("pula", activeKey);
@@ -85,7 +98,7 @@ export const App: React.FC = () => {
             isindexActive !== 1 &&
             isNotMatchingId(educationalDatas, activeKey) && (
               <CardList
-                onEdit={(key) => setActiveKey(key)}
+                onEdit={(key) => handleEditForm(key)}
                 type="educational"
                 datas={educationalDatas}
               ></CardList>
@@ -132,7 +145,7 @@ export const App: React.FC = () => {
             isindexActive !== 2 &&
             isNotMatchingId(practicalDatas, activeKey) && (
               <CardList
-                onEdit={(key) => setActiveKey(key)}
+                onEdit={(key) => handleEditForm(key)}
                 type="practical"
                 datas={practicalDatas}
               ></CardList>
@@ -172,7 +185,11 @@ export const App: React.FC = () => {
           </Button>
         </Section>
       </div>
-      <CvProfile></CvProfile>
+      <CvProfile
+        personalData={personalData}
+        educationalDatas={educationalDatas}
+        practicalDatas={practicalDatas}
+      ></CvProfile>
     </>
   );
 };

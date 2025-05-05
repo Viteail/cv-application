@@ -1,0 +1,8 @@
+.dateLocation {
+  flex: 1;
+  overflow: hidden;
+}
+
+.date, .location {
+  word-wrap: break-word;
+}
