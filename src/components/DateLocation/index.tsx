@@ -3,7 +3,7 @@ import classes from "./dateLocation.module.css";
 interface IDateLocationProps {
   startDate: string;
   endDate: string;
-  location?: string;
+  location: string;
 }
 
 export const DateLocation: React.FC<IDateLocationProps> = (props) => {

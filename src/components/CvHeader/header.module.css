@@ -1,9 +1,9 @@
-@import "../../colors/colors.css";
-
 .header {
   display: flex;
   align-items: center;
   flex-direction: column;
+  gap: 10px;
+  color: var(--white-color);
   background-color: var(--primary-color);
 }
 
@@ -20,5 +20,6 @@
 }
 
 .detailsWrapper > * {
-  text-align: center;
+  display: flex;
+  gap: 5px;
 }

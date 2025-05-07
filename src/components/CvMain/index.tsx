@@ -1,3 +1,5 @@
+import classes from './cvMain.module.css';
+
 import { TData } from "../App";
 
 import { CvEducationSection } from "../CvEducationSection";
@@ -12,11 +14,9 @@ export const CvMain: React.FC<ICvMainProps> = (props) => {
   const { educationalDatas, practicalDatas } = props;
 
   return (
-    <div>
-      <CvEducationSection
-        educationalDatas={educationalDatas}
-      ></CvEducationSection>
-      <CvPracticalSection practicalDatas={practicalDatas}></CvPracticalSection>
+    <div className={classes.main}>
+      <CvEducationSection educationalDatas={educationalDatas} />
+      <CvPracticalSection practicalDatas={practicalDatas} />
     </div>
   );
 };

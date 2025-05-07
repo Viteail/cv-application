@@ -1,5 +1,8 @@
 import classes from "./header.module.css";
 
+import Icon from "@mdi/react";
+import { mdiEmail, mdiMapMarker, mdiPhone } from "@mdi/js";
+
 import { TData } from "../App";
 
 interface ICvHeaderProps {
@@ -19,9 +22,18 @@ export const CvHeader: React.FC<ICvHeaderProps> = (props) => {
     <div className={classes.header}>
       <div className={classes.name}>{person.fname}</div>
       <div className={classes.detailsWrapper}>
-        <div>{person.email}</div>
-        <div>{person.phone}</div>
-        <div>{person.adress}</div>
+        <div>
+          <Icon path={mdiEmail} size={1}></Icon>
+          {person.email}
+        </div>
+        <div>
+          <Icon path={mdiPhone} size={1}></Icon>
+          {person.phone}
+        </div>
+        <div>
+          <Icon path={mdiMapMarker} size={1}></Icon>
+          {person.adress}
+        </div>
       </div>
     </div>
   );

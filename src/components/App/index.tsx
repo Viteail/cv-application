@@ -38,10 +38,6 @@ export const App: React.FC = () => {
     if (practicalDatas.length === 0)
       setPracticalDatas([getPracticalExampleData()]);
   }, []);
-  console.log(personalData, educationalDatas, practicalDatas);
-
-  console.log("pula", activeKey);
-  console.log("cns", isindexActive);
 
   const handleEditForm: TOnEdit = (key) => {
     setActiveKey(key);

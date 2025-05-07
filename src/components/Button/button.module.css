@@ -1,10 +1,8 @@
-@import "../../colors/colors.css";
-
 button {
   display: flex;
   place-items: center;
   cursor: pointer;
-  gap: 6px;
+  gap: 8px;
   font-weight: 600;
   font-size: 1rem;
   background-color: var(--white-color);
@@ -18,13 +16,11 @@ button:focus {
   border: none;
 }
 
-.buttonWrapper {
-}
-
 .cancelBtn,
 .deleteBtn,
 .submitBtn {
-  padding: 8px 16px;
+  padding: 0px 16px;
+  height: 36px;
   border-radius: 5px;
   transition: 100ms;
 }

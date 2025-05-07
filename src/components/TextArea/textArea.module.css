@@ -1,0 +1,18 @@
+.textAreaWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+textarea {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  resize: none;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: var(--neutral-color);
+  border: none;
+}
+
+textarea:focus {
+  outline: 2px solid var(--primary-outline-color);
+}

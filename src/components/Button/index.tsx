@@ -25,7 +25,7 @@ export const Button: React.FC<IButtonProps> = (props) => {
   } = props;
 
   return (
-    <div className={classes.buttonWrapper}>
+    <div>
       <button type={type} className={VariantMap[variant]} onClick={onClick}>
         {leftIcon}
         {children}

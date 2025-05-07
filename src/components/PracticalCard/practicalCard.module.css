@@ -3,7 +3,8 @@
   overflow: hidden;
 }
 
-.description .name,
+.description,
+.name,
 .position {
   word-wrap: break-word;
 }
