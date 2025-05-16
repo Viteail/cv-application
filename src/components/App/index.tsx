@@ -12,11 +12,6 @@ import { CardList, TOnEdit } from "../CardList";
 
 import { FORM_MAP } from "../Form/formConfigs";
 import { isNotMatchingId } from "./utils";
-import {
-  getEducationExampleData,
-  getPersonalExampleData,
-  getPracticalExampleData,
-} from "./mockData";
 
 export type TData = Record<string, string>;
 export type TIndexActive = number | null;
@@ -29,15 +24,6 @@ export const App: React.FC = () => {
   const [personalData, setPersonalData] = useState<TData[]>([]);
   const [educationalDatas, setEducationalDatas] = useState<TData[]>([]);
   const [practicalDatas, setPracticalDatas] = useState<TData[]>([]);
-
-  useEffect(() => {
-    if (personalData.length === 0)
-      setPersonalData([getPersonalExampleData()]);
-    if (educationalDatas.length === 0)
-      setEducationalDatas([getEducationExampleData()]);
-    if (practicalDatas.length === 0)
-      setPracticalDatas([getPracticalExampleData()]);
-  }, []);
 
   const handleEditForm: TOnEdit = (key) => {
     setActiveKey(key);

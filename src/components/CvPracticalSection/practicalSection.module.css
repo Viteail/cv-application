@@ -6,3 +6,9 @@
   display: flex;
   gap: 20px;
 }
+
+@media (max-width: 400px) {
+  .practicalItem {
+    flex-direction: column;
+  }
+}

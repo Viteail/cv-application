@@ -25,6 +25,12 @@ body {
   display: flex;
   justify-content: center;
   gap: 40px;
-  padding: 20px;
+  padding: 20px 0px;
   width: 100%;
+}
+
+@media (max-width: 800px) {
+  #root {
+    flex-direction: column;
+  }
 }

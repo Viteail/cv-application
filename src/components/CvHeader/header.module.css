@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  word-break: break-word;
   gap: 10px;
   color: var(--white-color);
   background-color: var(--primary-color);
@@ -21,5 +22,6 @@
 
 .detailsWrapper > * {
   display: flex;
+  text-align: center;
   gap: 5px;
 }

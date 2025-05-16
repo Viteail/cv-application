@@ -10,9 +10,16 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 0px 0px;
+  gap: 10px;
 }
 
-.btnsWrapper {
+.cancelSubmitWrapper {
   display: flex;
   gap: 10px;
+}
+
+@media (max-width: 800px) {
+  .formBtnWrapper {
+    flex-direction: column;
+  }
 }

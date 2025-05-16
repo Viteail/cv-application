@@ -21,7 +21,11 @@ export const CvPracticalSection: React.FC<ICvPracticalSectionProps> = (
       {practicalDatas.map((data) => {
         return (
           <div className={classes.practicalItem} key={data.id}>
-            <DateLocation startDate={data.sdate} endDate={data.edate} location={data.location}/>
+            <DateLocation
+              startDate={data.sdate}
+              endDate={data.edate}
+              location={data.location}
+            />
             <PracticalCard
               name={data.company}
               position={data.position}

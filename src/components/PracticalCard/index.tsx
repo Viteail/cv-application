@@ -1,4 +1,4 @@
-import classes from './practicalCard.module.css'
+import classes from "./practicalCard.module.css";
 
 interface IPracticalCardProps {
   name: string;

@@ -1,4 +1,4 @@
-import classes from './cvMain.module.css';
+import classes from "./cvMain.module.css";
 
 import { TData } from "../App";
 

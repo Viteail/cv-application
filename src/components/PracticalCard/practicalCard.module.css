@@ -1,12 +1,11 @@
 .practicalCard {
-  flex: 3;
   overflow: hidden;
 }
 
 .description,
 .name,
 .position {
-  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .name {

@@ -1,7 +1,8 @@
 .profile {
   display: flex;
   flex-direction: column;
-  width: 1000px;
+  max-width: 1000px;
+  width: 100%;
   box-shadow: 0px 0px 5px var(--primary-shadow-color);
 }
 
