@@ -1,11 +1,9 @@
-@import '../../colors/colors.css';
-
 .section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
-  padding: 12px 0px;
+  width: clamp(200px, 40vw, 400px);
+  padding: 12px 40px;
   box-shadow: 0px 0px 5px var(--primary-shadow-color);
   border-radius: 10px;
 }

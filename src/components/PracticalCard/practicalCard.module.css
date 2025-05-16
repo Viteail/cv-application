@@ -1,0 +1,13 @@
+.practicalCard {
+  overflow: hidden;
+}
+
+.description,
+.name,
+.position {
+  word-break: break-word;
+}
+
+.name {
+  font-weight: 600;
+}

@@ -1,0 +1,16 @@
+.dateLocation {
+  flex: 0 0 clamp(150px, 15vw, 200px);
+  overflow: hidden;
+}
+
+.date,
+.location {
+  word-wrap: break-word;
+}
+
+@media (max-width: 400px) {
+  .dateLocation {
+    overflow: visible;
+    flex: 0;
+  }
+}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiPlus } from "@mdi/js";
 
@@ -24,11 +24,6 @@ export const App: React.FC = () => {
   const [personalData, setPersonalData] = useState<TData[]>([]);
   const [educationalDatas, setEducationalDatas] = useState<TData[]>([]);
   const [practicalDatas, setPracticalDatas] = useState<TData[]>([]);
-
-  console.log(personalData, educationalDatas, practicalDatas);
-
-  console.log("pula", activeKey);
-  console.log("cns", isindexActive);
 
   const handleEditForm: TOnEdit = (key) => {
     setActiveKey(key);
@@ -85,7 +80,7 @@ export const App: React.FC = () => {
             isindexActive !== 1 &&
             isNotMatchingId(educationalDatas, activeKey) && (
               <CardList
-                onEdit={(key) => setActiveKey(key)}
+                onEdit={(key) => handleEditForm(key)}
                 type="educational"
                 datas={educationalDatas}
               ></CardList>
@@ -132,7 +127,7 @@ export const App: React.FC = () => {
             isindexActive !== 2 &&
             isNotMatchingId(practicalDatas, activeKey) && (
               <CardList
-                onEdit={(key) => setActiveKey(key)}
+                onEdit={(key) => handleEditForm(key)}
                 type="practical"
                 datas={practicalDatas}
               ></CardList>
@@ -172,7 +167,11 @@ export const App: React.FC = () => {
           </Button>
         </Section>
       </div>
-      <CvProfile></CvProfile>
+      <CvProfile
+        personalData={personalData}
+        educationalDatas={educationalDatas}
+        practicalDatas={practicalDatas}
+      ></CvProfile>
     </>
   );
 };

@@ -3,9 +3,23 @@
   flex-direction: column;
   gap: 10px;
   padding: 10px;
+  width: 100%;
 }
 
 .formBtnWrapper {
   display: flex;
   justify-content: space-between;
+  padding: 10px 0px 0px;
+  gap: 10px;
+}
+
+.cancelSubmitWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 800px) {
+  .formBtnWrapper {
+    flex-direction: column;
+  }
 }

@@ -26,4 +26,4 @@ export const FORM_MAP = {
   personal: PERSONAL_FORM,
   educational: EDUCATIONAL_FORM,
   practical: PRACTICAL_FORM,
-}
+};

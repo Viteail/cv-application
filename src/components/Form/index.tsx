@@ -4,6 +4,8 @@ import Icon from "@mdi/react";
 
 import { mdiDelete } from "@mdi/js";
 
+import { TextArea } from "../TextArea";
+
 import classes from "./form.module.css";
 
 import { TData } from "../App";
@@ -74,23 +76,38 @@ export const Form: React.FC<IFormProps> = (props) => {
       }}
       className={classes.form}
     >
-      {inputs.map((input) => (
-        <Input
-          key={input.name}
-          {...input}
-          value={dataInput === null ? "" : dataInput[input.name]}
-        ></Input>
-      ))}
-      <Button leftIcon={<Icon path={mdiDelete} size={1} />} onClick={handleDelete} variant="delete">
-        Delete
-      </Button>
+      {inputs.map((input) =>
+        input.name === "desc" ? (
+          <TextArea
+            key={input.name}
+            text={input.text}
+            name={input.name}
+            value={dataInput === null ? "" : dataInput[input.name]}
+          />
+        ) : (
+          <Input
+            key={input.name}
+            {...input}
+            value={dataInput === null ? "" : dataInput[input.name]}
+          ></Input>
+        ),
+      )}
       <div className={classes.formBtnWrapper}>
-        <Button onClick={onClickDeactivate} variant="cancel">
-          Cancel
+        <Button
+          leftIcon={<Icon path={mdiDelete} size={0.8} />}
+          onClick={handleDelete}
+          variant="delete"
+        >
+          Delete
         </Button>
-        <Button type="submit" variant="submit">
-          Submit
-        </Button>
+        <div className={classes.cancelSubmitWrapper}>
+          <Button onClick={onClickDeactivate} variant="cancel">
+            Cancel
+          </Button>
+          <Button type="submit" variant="submit">
+            Submit
+          </Button>
+        </div>
       </div>
     </form>
   );

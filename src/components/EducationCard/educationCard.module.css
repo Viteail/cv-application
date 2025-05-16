@@ -1,0 +1,12 @@
+.educationCard {
+  overflow: hidden;
+}
+
+.name,
+.degree {
+  word-break: break-word;
+}
+
+.name {
+  font-weight: 600;
+}
